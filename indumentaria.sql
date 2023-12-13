@@ -34,6 +34,7 @@ INSERT INTO products (name, description, type, talles, stock, price, imagen1, im
 VALUES
     ('Remera de algodón', 'Remera de algodón con cuello redondo', 'remera', 'S,M,L,XL', 10, 500.00, 'remera1.jpg', 'remera2.jpg', 'remera3.jpg', 1),
     ('Zapatillas deportivas', 'Zapatillas deportivas con suela de goma', 'calzado', '36,37,38,39,40,41,42,43,44,45', 5, 1500.00, 'zapatillas1.jpg', 'zapatillas2.jpg', 'zapatillas3.jpg', 2),
+<<<<<<< HEAD
     ('Pantalón de jean', 'Pantalón de jean con corte recto', 'pantalón', '28,29,30,31,32,33,34,35,36', 8, 1000.00, 'pantalon1.jpg', 'pantalon2.jpg', 'pantalon3.jpg', 3);
 
     ('lacoste zapatilla', 'zapatillas para salir', 'zapatilla', 40, 10, 30000, 'calzado_lacoste1.jpg', 'calzado_lacoste2.jpg', 'calzado_lacoste3.jpg', 3),
@@ -46,3 +47,6 @@ VALUES
     ('zapatillas dragon ball z', 'zapatillas dragon ball z, solo para hombres, marca adidas', 'zapatilla', 40, 10, 100000, 'goku.jpg', 'goku2.jpg', 3),
     ('chomba polo', 'chomba polo  ralph lauren, para la dama y el caballero', 'remera', 40, 10, 4800, 'polo.jpg', 'polo2.jpg', 1),
     ('jean rojo', 'jean rojo para el caballero, combinas con todo con este pantalon', 'pantalon', 40, 10, 40000, 'jean.jpg', 'jean2.jpg', 5),
+=======
+    ('Pantalón de jean', 'Pantalón de jean con corte recto', 'pantalón', '28,29,30,31,32,33,34,35,36', 8, 1000.00, 'pantalon1.jpg', 'pantalon2.jpg', 'pantalon3.jpg', 3);
+>>>>>>> be8be876dd830f101a64c0a8f903bfa120e6eb4a
