@@ -24,6 +24,28 @@ module.exports = (sequelize, DataTypes) => {
             // NOT NULL -> allowNull
             // allowNull: false
         },
+        talles: {
+            type: DataTypes.STRING(255)
+        },
+        description: {
+           type: DataTypes.STRING(255)
+        },
+        stock: {
+            type: DataTypes.INTEGER.UNSIGNED
+        },
+        talles: {
+            type: DataTypes.STRING(255)
+        },
+        imagen1: {
+            type: DataTypes.STRING(255)    
+        },
+        imagen2: {
+            type: DataTypes.STRING(255)
+        },
+        imagen3: {
+            type: DataTypes.STRING(255)
+        }
+
         
     };
 

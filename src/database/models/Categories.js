@@ -9,10 +9,13 @@ module.exports = (sequelize, DataTypes) => {
             // PRIMARY KEY -> primaryKey
             primaryKey: true
         },
-        name: {
+        type: {
             type: DataTypes.STRING(255),
             // NOT NULL -> allowNull
             // allowNull: false
+        },
+        subtype: {
+            type: DataTypes.STRING(255)
         }
         
     };

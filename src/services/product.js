@@ -5,7 +5,13 @@ const service = {
         let newProduct = {
             name: data.name,
             price: data.price,
-            category_id: data.category
+            category_id: data.category,
+            description: data.description,
+            talles: data.talles,
+            stock: data.stock,
+            imagen1: data.imagen1,
+            imagen2: data.imagen2,
+            imagen3: data.imagen3
         };
         Products.create(newProduct);
     }, // C
@@ -30,7 +36,13 @@ const service = {
         let newData = {
             name: data.name,
             price: data.price,
-            category_id: data.category
+            category_id: data.category,
+            description: data.description,
+            talles: data.talles,
+            stock: data.stock,
+            imagen1: data.imagen1,
+            imagen2: data.imagen2,
+            imagen3: data.imagen3
         };
 
         let resultado = Products.update(newData, {
