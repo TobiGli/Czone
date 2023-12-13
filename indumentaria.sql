@@ -1,4 +1,4 @@
-DROP DATABASE IF EXISTS indumentaria_urbana,
+DROP DATABASE IF EXISTS indumentaria_urbana;
 CREATE DATABASE indumentaria_urbana;
 
 CREATE TABLE prendas (
@@ -7,7 +7,7 @@ CREATE TABLE prendas (
     category_id INT UNSIGNED NOT NULL,
     price INT UNSIGNED NOT NULL,
     description VARCHAR(255) NOT NULL,
-    FOREIGN KEY (category_id) REFERENCES categories(id)
+    FOREIGN KEY (category_id) REFERENCES categories(id),
     type ENUM('remera', 'calzado', 'pantalón', 'accesorio', 'abrigo') NOT NULL,
     talles VARCHAR(50) NOT NULL,
     stock INT NOT NULL,
@@ -20,8 +20,8 @@ CREATE TABLE prendas (
 CREATE TABLE categories (
     id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     type VARCHAR(255) NOT NULL,
-    subtype VARCHAR(255) NOT NULL,
-);
+    subtype VARCHAR(255) NOT NULL);
+    
 INSERT INTO categories (name) VALUES ('remera', 'calzado', 'pantalón', 'accesorio', 'abrigo');
 
 
