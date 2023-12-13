@@ -1,7 +1,7 @@
 DROP DATABASE IF EXISTS indumentaria_urbana;
 CREATE DATABASE indumentaria_urbana;
 
-CREATE TABLE prendas (
+CREATE TABLE products (
     id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
     category_id INT UNSIGNED NOT NULL,
@@ -30,7 +30,7 @@ VALUES
     ('pantalón', 'jogger');
 
 
-INSERT INTO prendas (name, description, type, talles, stock, price, imagen1, imagen2, imagen3, category_id)
+INSERT INTO products (name, description, type, talles, stock, price, imagen1, imagen2, imagen3, category_id)
 VALUES
     ('Remera de algodón', 'Remera de algodón con cuello redondo', 'remera', 'S,M,L,XL', 10, 500.00, 'remera1.jpg', 'remera2.jpg', 'remera3.jpg', 1),
     ('Zapatillas deportivas', 'Zapatillas deportivas con suela de goma', 'calzado', '36,37,38,39,40,41,42,43,44,45', 5, 1500.00, 'zapatillas1.jpg', 'zapatillas2.jpg', 'zapatillas3.jpg', 2),
