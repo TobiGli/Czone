@@ -1,0 +1,8 @@
+body {
+    background-color: aquamarine;
+}
+
+body.dark {
+    background-color: darkred;
+    color: snow;
+}
