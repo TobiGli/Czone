@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!--fontCdn inicio-->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+      integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <!--fontCdn fin-->
+    <!--bs inicio-->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+
+    <link rel="stylesheet" href="../../public/css/detalleProducto.css">
+    <!--bs fin-->
+    <title>C Zone</title>
+    <!--css inicio-->
+    <link rel="stylesheet" href="../../public/css/style.css" />
+    <!--css fin-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+  </head>
+  <body>
+    <!--navbar inicio-->
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">C Zone</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNavDropdown"
+          aria-controls="navbarNavDropdown"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Features</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Pricing</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                Dropdown link
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">Action</a></li>
+                <li><a class="dropdown-item" href="#">Another action</a></li>
+                <li>
+                  <a class="dropdown-item" href="#">Something else here</a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+        <div class="">
+          <button type="button" class="btn">
+            <i class="fa fa-shopping-cart"></i>
+          </button>
+        </div>
+        <div class="">
+          <button type="button" class="btn">
+            <i class="fa fa-heart"></i>
+          </button>
+        </div>
+        <div class="">
+          <button type="button" class="btn">
+            <i class="fa fa-search"></i>
+          </button>
+        </div>
+      </div>
+    </nav>
+ 
+    <section class="caja-detalle">
+        <div>
+          <div class="cnt-img-carr">
+            <div id="carouselExampleIndicators" class="carousel slide  carrusel-img">
+              <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+              </div>
+              <div class="carousel-inner">
+                <div class="carousel-item active">
+                  <img src="../../public/img//Producto1-a.png" class="d-block w-100" alt="...">
+                </div>
+                <div class="carousel-item">
+                  <img src="../../public/img//Producto1-a.png" class="d-block w-100" alt="...">
+                </div>
+                <div class="carousel-item">
+                  <img src="../../public/img/Producto1-a.png" class="d-block w-100" alt="...">
+                </div>
+              </div>
+              <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+              </button>
+              <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="contenedor-img2">
+            <h5 class="text-producto">Productos relacionados</h5>
+            <h6 class="text-producto2">Promocionado</h6>
+            
+
+           <div id="carouselExample" class="carousel slide secc-novedades" data-bs-ride="carousel">
+          <div class="carousel-inner ">
+
+            <div class="carousel-item active " data-bs-interval="5000">
+             
+              <div class="cont-carrusel ">
+                <div class="cont-prod">
+                  <img src="../../public/img/Captura de pantalla 2023-12-05 191238.png" alt="...">
+                  <div class="info-prod">
+                    <p class="text-nombre">CAMISETA ROSA 28</p>
+                    <p class="text-precio">$4500</p>
+                    
+                  </div> 
+                </div>
+  
+                <div class="cont-prod">
+                  <img src="../../public/img/Captura de pantalla 2023-12-05 191238.png" alt="...">
+                  <div class="info-prod">
+                    <p class="text-nombre">PANTALÓN CORTO DE FÚTBOL VERDE</p>
+                    <p class="text-precio">$3500</p>
+                    
+                  </div> 
+                </div>
+  
+                <div class="cont-prod">
+                  <img src="../../public/img/Captura de pantalla 2023-12-05 191238.png" alt="...">
+                  <div class="info-prod">
+                    <p class="text-nombre">CAMISETA DE FÚTBOL VERDE</p>
+                    <p class="text-precio">$6500</p>
+                    
+                  </div> 
+                </div>
+
+            
+              </div>
+
+            </div>
+
+            <div class="carousel-item " data-bs-interval="5000">
+
+              <div class="cont-carrusel ">
+                <div class="cont-prod">
+                  <img src="../../public/img/Captura de pantalla 2023-12-05 191238.png" alt="...">
+                  <div class="info-prod">
+                    <p class="text-nombre">CAMISETA ROSA 28</p>
+                    <p class="text-precio">$4500</p>
+                    
+                  </div> 
+                </div>
+  
+                <div class="cont-prod">
+                  <img src="../../public/img/Captura de pantalla 2023-12-05 191238.png" alt="...">
+                  <div class="info-prod">
+                    <p class="text-nombre">PANTALÓN CORTO DE FÚTBOL VERDE</p>
+                    <p class="text-precio">$3500</p>
+                    
+                  </div> 
+                </div>
+  
+                <div class="cont-prod">
+                  <img src="../../public/img/Captura de pantalla 2023-12-05 191238.png" alt="...">
+                  <div class="info-prod">
+                    <p class="text-nombre">CAMISETA DE FÚTBOL VERDE</p>
+                    <p class="text-precio">$6500</p>
+                    
+                  </div> 
+                </div>
+
+            
+              </div>
+      
+            </div>
+
+          </div>
+
+          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+        </div>
+
+
+          </div>
+
+          <div class="contenedor-carac">
+            <h5 class="text-producto">Caracteristicas del producto</h5>
+
+            <div class="caract-ic">
+              <i class="bi bi-tags"></i>
+              <h6 class="text-producto2">Marca:</h6>
+            </div>
+            
+            <div class="caract-ic">
+              <i class="bi bi-stack"></i>
+            <h6 class="text-producto2">Material principal:Algodon</h6>
+            </div>
+          </div>
+          
+          <div class="contenedor-carac">
+            <h5 class="text-producto">Descripcion</h5>
+      Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quod saepe cupiditate quas architecto. Itaque sed sint modi impedit! Facilis sit quod at magni? Atque suscipit esse in possimus tempora nemo.
+          </div>
+
+          <div class="contenedor-carac">
+          
+            <h5 class="text-producto">Calificacion de caracteristicas </h5>
+
+            <div class="contenedor-calif">
+              <div class="secc-1" >
+
+                <div>
+                  <h6 class="text-producto2">Calidad de tela</h6>
+                  <div class="contenedor-estrella2">
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-half"></i>
+                  </div>
+                </div>
+  
+                <div>
+                  <h6 class="text-producto2">Comodidad</h6>
+                  <div class="contenedor-estrella2">
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-half"></i>
+                  </div>
+                </div>
+  
+                <div>
+                  <h6 class="text-producto2">Relacion precio-calidad</h6>
+                  <div class="contenedor-estrella2">
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-half"></i>
+                  </div>
+                </div>
+  
+              </div>
+  
+             <div>
+              
+              <div>
+                <h6 class="text-producto2">Mantiene su color al lavarlo</h6>
+                <div class="contenedor-estrella2">
+                  <i class="bi bi-star-fill"></i>
+                  <i class="bi bi-star-fill"></i>
+                  <i class="bi bi-star-fill"></i>
+                  <i class="bi bi-star-fill"></i>
+                  <i class="bi bi-star-half"></i>
+                </div>
+              </div>
+  
+              <div>
+                <h6 class="text-producto2">Mantiene su tamaño al lavarlo</h6>
+                <div class="contenedor-estrella2">
+                  <i class="bi bi-star-fill"></i>
+                  <i class="bi bi-star-fill"></i>
+                  <i class="bi bi-star-fill"></i>
+                  <i class="bi bi-star-fill"></i>
+                  <i class="bi bi-star-half"></i>
+                </div>
+              </div>
+             </div>
+            </div>
+
+          </div>
+
+        </div>
+
+        <div class="contenedor-padre">
+          <div class="contenedor-descripcion">
+
+            <i class="bi bi-heart icono-fav"></i>
+              <h1 class="text-descripcion">Remera Lisa Unisex Polo Oversized Remeron Liso 100% Algodon</h1>
+              <div class="contenedor-estrella">
+                <p>4.7</p>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-half"></i>
+              </div>
+              <h2 class="text-descripcion-1"> $12.997</h2>
+              <h5 class="text-descripcion-2"> en 12x $2.609 </h5>
+              <a class="text-descripcion-3" href="#metodoDePago">Ver los medios de pago</a>
+              <h5 class="text-descripcion-4"> Devolución gratis</h5>
+              <h6 class="text-descripcion-5">Tenés 30 días desde que lo recibís.</h6>
+            
+              <div  class="contenedor-cantidad">
+                  <h4 class="text-descripcion-6">Color:</h4>
+                  <select class="form-select form-select-sm boton-cantidad" aria-label="Small select example">
+                      <option selected>Blanco</option>
+                      <option value="1">Maron</option>
+                      <option value="2">Negro</option>
+                      <option value="3">Rosa</option>
+                  </select>
+  
+              </div>
+              
+              
+              <div class="contenedor-cantidad">
+                  <h4 class="text-descripcion-7">Talle:</h4>
+                  <select class="form-select form-select-sm boton-cantidad" aria-label="Small select example">
+                      <option selected>M</option>
+                      <option value="1">L</option>
+                      <option value="2">XL</option>
+                      <option value="3">XXL</option>
+                  </select>
+  
+              </div>
+              <div class="contenedor-cantidad">
+                  <h4 class="text-cantidad">Cantidad</h4>
+                  <select class="form-select form-select-sm boton-cantidad" aria-label="Small select example">
+                      <option selected>0</option>
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                  </select>
+              </div>
+              <h4 class="text-descripcion-9">Stok disponible</h4>
+
+              <div class="contenedor-boton">
+                <div class="d-grid gap-2">
+                  <button class="btn btn-primary" type="button">Comprar ahora</button>
+                  <button class="btn btn-primary" type="button">Agregar al carrito</button>
+                </div>
+  
+              </div>
+  
+  
+              
+          </div>
+          
+          <div id="metodoDePago" class="contenedor-pago">
+           <h2 class="text-p1">Medios de pago</h2>
+           <h4 class="text-p2">Hasta 12 cuotas sin tarjeta</h4>
+           <img class="tarjetas-1" src="../../public/img/tarjeta1.png" alt="">
+
+           <h4 class="text-p2">Tarjetas de credito</h4>
+           <img class="tarjetas-1-2" src="../../public/img/tarjeta 2.png" alt="">
+
+           <img class="tarjetas-2"  src="../../public/img/tarjeta3.png" alt="">
+           <img class="tarjetas-2"  src="../../public/img/tarjeta4.png" alt="">
+
+           <h4 class="text-p2">Tarjetas de debito</h4>
+           <img class="tarjetas-2-1"  src="../../public/img/tarjeta5.png" alt="">
+           <img class="tarjetas-2" src="../../public/img/tarjeta6.png" alt="">
+           <img class="tarjetas-2" src="../../public/img/tarjeta7.png" alt="">
+           <img class="tarjetas-2" src="../../public/img/tarjeta8.png" alt="">
+
+           <h4 class="text-p2">Efectivo</h4>
+           <img class="tarjetas-2-3"  src="../../public/img/tarjeta9.png" alt="">
+          <img class="tarjetas-2" src="../../public/img/tarjeta10.png" alt="">
+          </div>
+
+          <div class="img-desc">
+            <img src="../../public/img/img-descuento.png" alt="" width="400px">
+          </div>
+          <div class="img-desc2">
+            <img src="../../public/img/img-descuento2.png" alt="" width="400px" height="170px">
+          </div>
+        </div>
+
+        
+        
+        
+
+    </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!--subscripcion fin-->
+    <!--footer inicio-->
+    <footer class="bg-dark py-5">
+      <div class="container">
+        <div class="row text-white g-4">
+          <div class="col-md-6 col-lg-3">
+            <a
+              class="text-uppercase text-decoration-none brand text-white"
+              href="index.html"
+              >C Zone
+            </a>
+            <p class="text-white mt-3">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem
+              vitae consequuntur cum doloribus commodi aliquid voluptate
+              consequatur in nostrum saepe!
+            </p>
+          </div>
+          <div class="col-md-6 col-lg-3">
+            <h5 class="fw-light">Links</h5>
+            <ul class="">
+              <li class="my-3">
+                <a href="#" class="text-white text-decoration-none">
+                  <i class="fas fa-chevron-right me-1">Inicio</i>
+                </a>
+              </li>
+              <li class="my-3">
+                <a href="#" class="text-white text-decoration-none">
+                  <i class="fas fa-chevron-right me-1">Coleccion</i>
+                </a>
+              </li>
+              <li class="my-3">
+                <a href="#" class="text-white text-decoration-none">
+                  <i class="fas fa-chevron-right me-1">Nosotros</i>
+                </a>
+              </li>
+              <li class="my-3">
+                <a href="#" class="text-white text-decoration-none">
+                  <i class="fas fa-chevron-right me-1">Nuestro Trabajo</i>
+                </a>
+              </li>
+            </ul>
+          </div>
+          <div class="col-md-6 col-lg-3">
+            <h5 class="fw-light mb-3">Contactos</h5>
+            <div class="d-flex justify-content-star align-items-start my-2">
+              <span class="me-3">
+                <i class="fas fa-map-marked-alt"></i>
+              </span>
+              <span class="fw-light">Pueblo Paleta, Casa Techo Azul</span>
+            </div>
+            <div class="d-flex justify-content-star align-items-start my-2">
+              <span class="me-3">
+                <i class="fas fa-envelope"></i>
+              </span>
+              <span class="fw-light">CZone@gmail.com</span>
+            </div>
+            <div class="d-flex justify-content-star align-items-start my-2">
+              <span class="me-3">
+                <i class="fas fa-phone-alt"></i>
+              </span>
+              <span class="fw-light">15 4576 9876</span>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-3">
+            <h5 class="fw-light mb-3">Siguenos!</h5>
+            <div>
+              <ul class="list-unstyled d-flex">
+                <li>
+                  <a href="#" class="text-white text-decoration-none fs-4 me-4">
+                    <i class="fab fa-facebook-f"></i>
+                  </a>
+                </li>
+                <li>
+                  <a href="#" class="text-white text-decoration-none fs-4 me-4">
+                    <i class="fab fa-twitter"></i>
+                  </a>
+                </li>
+                <li>
+                  <a href="#" class="text-white text-decoration-none fs-4 me-4">
+                    <i class="fab fa-instagram"></i>
+                  </a>
+                </li>
+                <li>
+                  <a href="#" class="text-white text-decoration-none fs-4 me-4">
+                    <i class="fab fa-pinterest"></i>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <!--footer fin-->
+    <!--bs inicio-->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"
+    ></script>
+    <!--bs fin-->
+  </body>
+</html>
