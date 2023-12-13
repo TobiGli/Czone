@@ -1,5 +1,5 @@
-DROP DATABASE IF Indumentaria_urbana EXISTS
-CREATE DATABASE Indumentaria_urbana;
+DROP DATABASE IF EXISTS indumentaria_urbana,
+CREATE DATABASE indumentaria_urbana;
 
 CREATE TABLE prendas (
     id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
