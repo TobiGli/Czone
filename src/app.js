@@ -6,6 +6,8 @@ app.listen(port, () => {
     console.log("Escuchando en puerto "+port);
 });
 
+app.set('view engine', 'ejs');
+
 // Middleware (app.use)
 // Estos dos permiten procesar los formularios que se le envíen al servidor
 app.use(express.urlencoded({extended: false}));
