@@ -7,7 +7,9 @@ const port = Number(process.env.PORT) || 3418;
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
-app.use(express.static(path.join(process.cwd(), "public")));
+const publicPath = path.join(process.cwd(), "public");
+app.use("/public", express.static(publicPath));
+app.use(express.static(publicPath));
 app.use(mainRouter);
 
 app.use((error: Error, _req: Request, res: Response, _next: NextFunction) => {

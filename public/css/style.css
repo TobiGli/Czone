@@ -1,13 +1,234 @@
-@import url("https://fonts.googleapis.com/css2?family=Averia+Sans+Libre:ital@1&family=Vina+Sans&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Space+Grotesk:wght@500;600;700&display=swap");
 
 :root {
-  font-family: "Averia Sans Libre", sans-serif;
-  font-family: "Vina Sans", sans-serif;
+  --ink: #17211f;
+  --muted-ink: #64706d;
+  --paper: #f6f3ed;
+  --accent: #e35b32;
+  --accent-dark: #b94222;
+  --line: rgba(23, 33, 31, 0.12);
+  --body-font: "DM Sans", sans-serif;
+  --display-font: "Space Grotesk", sans-serif;
+  font-family: var(--body-font);
 }
 
-/*header*/
+body {
+  background: var(--paper);
+  color: var(--ink);
+}
+
+.site-nav {
+  position: sticky;
+  top: 0;
+  z-index: 1030;
+  background: rgba(246, 243, 237, 0.94);
+  border-bottom: 1px solid var(--line);
+  backdrop-filter: blur(16px);
+}
+
+.nav-inner {
+  width: min(1180px, calc(100% - 40px));
+  min-height: 76px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 42px;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  color: var(--ink);
+  font-family: var(--display-font);
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-decoration: none;
+}
+
+.brand-mark {
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  color: var(--paper);
+  background: var(--accent);
+  border-radius: 50% 50% 50% 8px;
+  font-size: 1.1rem;
+}
+
+.nav-content {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav-links,
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.nav-link {
+  position: relative;
+  padding: 28px 14px 25px;
+  color: var(--muted-ink);
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: color 180ms ease;
+}
+
+.nav-link::after {
+  position: absolute;
+  right: 14px;
+  bottom: 17px;
+  left: 14px;
+  height: 2px;
+  background: var(--accent);
+  content: "";
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 180ms ease;
+}
+
+.nav-link:hover,
+.nav-link.active {
+  color: var(--ink);
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+  transform: scaleX(1);
+}
+
+.nav-action {
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  position: relative;
+  border: 0;
+  border-radius: 50%;
+  color: var(--ink);
+  background: transparent;
+  font-size: 0.95rem;
+  text-decoration: none;
+  transition: color 180ms ease, background 180ms ease, transform 180ms ease;
+}
+
+.nav-action:hover {
+  color: var(--accent-dark);
+  background: rgba(227, 91, 50, 0.1);
+  transform: translateY(-2px);
+}
+
+.cart-count {
+  position: absolute;
+  top: 0;
+  right: -1px;
+  min-width: 16px;
+  height: 16px;
+  padding: 0 4px;
+  display: grid;
+  place-items: center;
+  color: #fff;
+  background: var(--accent);
+  border: 2px solid var(--paper);
+  border-radius: 99px;
+  font-size: 0.58rem;
+  font-weight: 700;
+}
+
+.nav-toggle-input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.nav-toggle {
+  display: none;
+  color: var(--ink);
+  cursor: pointer;
+  font-size: 1.2rem;
+}
+
+/* Hero */
 #header {
-  background: url(/IMG/mein2.jpg) top/cover no-repeat !important;
+  min-height: calc(100svh - 76px);
+  background: linear-gradient(90deg, rgba(15, 24, 22, 0.7), rgba(15, 24, 22, 0.08)), url(/img/mein2.jpg) top/cover no-repeat !important;
+}
+
+.carousel-inner h1 {
+  font-family: var(--display-font);
+}
+
+.carousel-item .btn {
+  border-color: white !important;
+}
+
+.carousel-item .btn:hover {
+  color: #fff;
+  background-color: var(--accent-dark);
+  border-color: var(--accent-dark) !important;
+}
+
+@media (max-width: 760px) {
+  .nav-inner {
+    width: min(100% - 28px, 1180px);
+    min-height: 68px;
+    flex-wrap: wrap;
+    gap: 0;
+  }
+
+  .nav-toggle {
+    display: block;
+    margin-left: auto;
+    padding: 12px;
+  }
+
+  .nav-content {
+    flex-basis: 100%;
+    display: none;
+    padding: 8px 0 18px;
+  }
+
+  .nav-toggle-input:checked ~ .nav-content {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .nav-links {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+  }
+
+  .nav-link {
+    padding: 12px 0;
+  }
+
+  .nav-link::after {
+    right: auto;
+    bottom: 5px;
+    left: 0;
+    width: 35px;
+  }
+
+  .nav-actions {
+    justify-content: flex-start;
+    border-top: 1px solid var(--line);
+    padding-top: 10px;
+  }
+
+  #header {
+    min-height: calc(100svh - 68px);
+  }
 }
 .carousel-inner h1 {
   font-size: 60px;
