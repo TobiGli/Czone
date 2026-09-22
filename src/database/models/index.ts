@@ -1,10 +1,13 @@
 import { Sequelize } from "sequelize";
-import config from "../config/config";
+import { databaseOptions, databaseUrl } from "../config/config";
 import { Categories, initCategories } from "./Categories";
 import { Products, initProducts } from "./Products";
 
-const settings = config[process.env.NODE_ENV || "development"];
-const sequelize = new Sequelize(settings.database, settings.username, settings.password, settings);
+if (!databaseUrl) {
+	console.warn("DATABASE_URL no está configurada; las rutas de productos no podrán conectarse.");
+}
+
+const sequelize = new Sequelize(databaseUrl || "postgres://localhost:26257/defaultdb", databaseOptions);
 
 initCategories(sequelize);
 initProducts(sequelize);

@@ -11,12 +11,12 @@ Configura el servicio como `Web Service` con estos comandos:
 - **Build Command:** `npm ci --include=dev && npm run build`
 - **Start Command:** `npm start`
 
-Define estas variables de entorno en Render para conectar MySQL:
+Define estas variables de entorno en Render para conectar CockroachDB:
 
 - `NODE_ENV=production`
-- `DB_USER`
-- `DB_PASSWORD`
-- `DB_NAME`
-- `DB_HOST`
+- `DATABASE_URL`: la cadena PostgreSQL completa que entrega CockroachDB Cloud.
+- `DB_SSL_CA`: contenido completo de `root.crt`, incluido en una sola variable multilínea.
 
 Render inyecta `PORT` automáticamente y el servidor ya lo utiliza. No uses `node src/app.js`, porque el servidor ahora se compila a `dist/app.js`.
+
+Para desarrollo local, descarga el certificado con el comando oficial de CockroachDB y configura `DATABASE_URL` en un archivo `.env` local. No subas ese archivo al repositorio. La contraseña debe estar URL-encoded si contiene caracteres especiales.

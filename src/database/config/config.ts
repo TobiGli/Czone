@@ -1,11 +1,28 @@
+import fs from "fs";
+import path from "path";
 import { Options } from "sequelize";
 
-type DatabaseConfig = Options & { username: string; password: string; database: string };
+const caPath = process.env.DB_CA_PATH || path.join(process.env.APPDATA || "", "postgresql", "root.crt");
+const sslCa = process.env.DB_SSL_CA || (fs.existsSync(caPath) ? fs.readFileSync(caPath, "utf8") : undefined);
 
-const config: Record<string, DatabaseConfig> = {
-    development: { username: process.env.DB_USER || "root", password: process.env.DB_PASSWORD || "", database: process.env.DB_NAME || "indumentaria_urbana", host: process.env.DB_HOST || "127.0.0.1", dialect: "mysql" },
-    test: { username: process.env.DB_USER || "root", password: process.env.DB_PASSWORD || "", database: process.env.DB_NAME || "indumentaria_urbana", host: process.env.DB_HOST || "127.0.0.1", dialect: "mysql" },
-    production: { username: process.env.DB_USER || "root", password: process.env.DB_PASSWORD || "", database: process.env.DB_NAME || "indumentaria_urbana", host: process.env.DB_HOST || "127.0.0.1", dialect: "mysql" }
+const removeConnectionSslOptions = (value: string): string => {
+    try {
+        const url = new URL(value);
+        ["sslmode", "sslrootcert", "sslcert", "sslkey"].forEach((key) => url.searchParams.delete(key));
+        return url.toString();
+    } catch {
+        return value;
+    }
 };
 
-export default config;
+export const databaseUrl = process.env.DATABASE_URL
+    ? removeConnectionSslOptions(process.env.DATABASE_URL)
+    : undefined;
+
+export const databaseOptions: Options = {
+    dialect: "postgres",
+    logging: false,
+    dialectOptions: sslCa
+        ? { ssl: { require: true, rejectUnauthorized: true, ca: sslCa } }
+        : undefined
+};
