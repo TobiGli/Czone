@@ -14,7 +14,18 @@ app.use(mainRouter);
 
 app.use((error: Error, _req: Request, res: Response, _next: NextFunction) => {
     console.error(error);
-    res.status(500).json({ error: "Error interno del servidor" });
+    const databaseError = error as Error & {
+        parent?: NodeJS.ErrnoException;
+        original?: NodeJS.ErrnoException;
+    };
+    const databaseUnavailable = error.name === "SequelizeConnectionRefusedError"
+        || databaseError.parent?.code === "ECONNREFUSED"
+        || databaseError.original?.code === "ECONNREFUSED";
+    res.status(500).json({
+        error: databaseUnavailable
+            ? "No se pudo conectar con la base de datos"
+            : "Error interno del servidor"
+    });
 });
 
 app.listen(port, () => console.log(`Escuchando en puerto ${port}`));
