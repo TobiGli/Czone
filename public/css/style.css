@@ -6,7 +6,8 @@
   --paper: #f6f3ed;
   --accent: #e35b32;
   --accent-dark: #b94222;
-  --line: rgba(23, 33, 31, 0.12);
+  --line: rgba(23, 33, 31, 0.08);
+  --soft-shadow: 0 14px 36px rgba(23, 33, 31, 0.08);
   --body-font: "DM Sans", sans-serif;
   --display-font: "Space Grotesk", sans-serif;
   font-family: var(--body-font);
@@ -304,8 +305,10 @@ body {
 
 .product-card {
   overflow: hidden;
-  background: #fff;
+  background: rgba(255, 255, 255, 0.72);
   border: 1px solid var(--line);
+  border-radius: 18px;
+  box-shadow: 0 8px 24px rgba(23, 33, 31, 0.04);
 }
 
 .product-image-wrap {
@@ -313,6 +316,7 @@ body {
   aspect-ratio: 4 / 5;
   overflow: hidden;
   background: #e8e4dc;
+  border-radius: 18px 18px 0 0;
 }
 
 .product-image {
@@ -376,6 +380,7 @@ body {
 .add-to-cart,
 .checkout-button {
   border: 0;
+  border-radius: 999px;
   padding: 10px 14px;
   color: #fff;
   background: var(--ink);
@@ -436,6 +441,7 @@ body {
   color: var(--ink);
   background: var(--paper);
   box-shadow: 12px 0 40px rgba(23, 33, 31, 0.16);
+  border-radius: 0 24px 24px 0;
   transform: translateX(-102%);
   transition: transform 300ms cubic-bezier(0.22, 1, 0.36, 1);
 }
@@ -454,6 +460,14 @@ body {
   color: var(--ink);
   background: transparent;
   cursor: pointer;
+  transition: color 180ms ease, background 180ms ease, border-color 180ms ease;
+}
+
+.drawer-close:hover,
+.search-close:hover {
+  border-color: transparent;
+  color: var(--accent-dark);
+  background: rgba(227, 91, 50, 0.1);
 }
 
 .drawer-content h2 {
@@ -556,6 +570,10 @@ body {
   width: min(760px, calc(100% - 40px));
   margin: 0 auto;
   padding-top: 10vh;
+}
+
+.search-panel .search-close {
+  float: right;
 }
 
 .search-form {
@@ -1108,13 +1126,17 @@ footer .brand {
 
 .story-card {
   overflow: hidden;
-  background: #fff;
+  background: rgba(255, 255, 255, 0.74);
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  box-shadow: var(--soft-shadow);
 }
 
 .story-card img {
   width: 100%;
   height: 240px;
   object-fit: cover;
+  border-radius: 22px 22px 0 0;
 }
 
 .story-card-wide img {
@@ -1297,7 +1319,8 @@ footer .brand {
   min-height: 190px;
   padding: 50px max(20px, calc((100% - 1180px) / 2));
   color: rgba(255, 255, 255, 0.7);
-  background: var(--ink);
+  background: #273735;
+  border-radius: 28px 28px 0 0;
 }
 
 .footer-brand {
@@ -1346,6 +1369,33 @@ footer .brand {
   white-space: nowrap;
 }
 
+.home-product-image,
+.hoodie-card .home-product-image {
+  border-radius: 22px;
+}
+
+.offer-banner {
+  width: min(1180px, calc(100% - 40px));
+  margin: 0 auto 40px;
+  border-radius: 30px;
+  box-shadow: var(--soft-shadow);
+}
+
+.offer-banner::before {
+  border-radius: 30px;
+}
+
+.newsletter-section {
+  width: min(1180px, calc(100% - 40px));
+  margin: 0 auto 40px;
+  border-radius: 28px;
+  box-shadow: var(--soft-shadow);
+}
+
+.solid-link {
+  border-radius: 999px;
+}
+
 .footer-contact span i {
   margin-right: 5px;
   color: #f6c6a8;
@@ -1392,8 +1442,10 @@ footer .brand {
   display: grid;
   gap: 20px;
   padding: 34px;
-  background: #fff;
+  background: rgba(255, 255, 255, 0.72);
   border: 1px solid var(--line);
+  border-radius: 24px;
+  box-shadow: var(--soft-shadow);
 }
 
 .contact-form label {
