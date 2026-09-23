@@ -43,20 +43,20 @@
         <div class="nav-content">
           <div class="nav-links">
             <a class="nav-link" href="/">Inicio</a>
-            <a class="nav-link" href="/#collection">Colección</a>
-            <a class="nav-link" href="/#offers">Ofertas</a>
+            <a class="nav-link" href="/coleccion">Colección</a>
+            <a class="nav-link" href="/ofertas">Ofertas</a>
           </div>
           <div class="nav-actions">
-            <button class="nav-action" type="button" aria-label="Buscar">
+            <button class="nav-action search-trigger" type="button" aria-label="Buscar">
               <i class="fas fa-search"></i>
             </button>
-            <button class="nav-action" type="button" aria-label="Favoritos">
+            <button class="nav-action favorites-trigger" type="button" aria-label="Favoritos">
               <i class="far fa-heart"></i>
             </button>
-            <a class="nav-action cart-action" href="#cart" aria-label="Carrito">
+            <button class="nav-action cart-action cart-trigger" type="button" aria-label="Carrito">
               <i class="fas fa-shopping-bag"></i>
               <span class="cart-count">0</span>
-            </a>
+            </button>
           </div>
         </div>
       </div>
@@ -491,6 +491,7 @@
       integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
       crossorigin="anonymous"
     ></script>
+    <script src="/js/storefront.js" defer></script>
     <!--bs fin-->
   </body>
 </html>

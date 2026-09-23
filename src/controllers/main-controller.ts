@@ -8,6 +8,12 @@ const controller = {
     home: (_req: Request, res: Response) => {
         res.sendFile(path.join(process.cwd(), "src", "views", "home.html"));
     },
+    collection: (_req: Request, res: Response) => {
+        res.sendFile(path.join(process.cwd(), "src", "views", "collection.html"));
+    },
+    offers: (_req: Request, res: Response) => {
+        res.sendFile(path.join(process.cwd(), "src", "views", "offers.html"));
+    },
     productCreate: async (req: Request, res: Response) => {
         if (!req.body.name || req.body.price === undefined) {
             return res.status(400).json({ error: "name y price son obligatorios" });
