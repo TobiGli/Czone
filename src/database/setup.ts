@@ -29,12 +29,14 @@ async function setupDatabase(): Promise<void> {
             talles STRING(255),
             description STRING(255),
             stock INT,
+            sales_count INT DEFAULT 0,
             imagen1 STRING(255),
             imagen2 STRING(255),
             imagen3 STRING(255)
         )
     `);
     await sequelize.query("ALTER TABLE products ADD COLUMN IF NOT EXISTS type STRING(100)");
+    await sequelize.query("ALTER TABLE products ADD COLUMN IF NOT EXISTS sales_count INT DEFAULT 0");
 
     if (await Categories.count() === 0) {
         await Categories.bulkCreate(categories);
@@ -111,6 +113,13 @@ async function setupDatabase(): Promise<void> {
             await Products.create(product);
         }
     }
+
+    await Products.update({ sales_count: 84 }, { where: { name: "Buzo oversize Essential" } });
+    await Products.update({ sales_count: 71 }, { where: { name: "Remera Street Club" } });
+    await Products.update({ sales_count: 63 }, { where: { name: "Zapatillas deportivas" } });
+    await Products.update({ sales_count: 55 }, { where: { name: "Pantalon de jean" } });
+    await Products.update({ sales_count: 48 }, { where: { name: "Pantalon cargo Utility" } });
+    await Products.update({ sales_count: 41 }, { where: { name: "Campera Urban Light" } });
 
     console.log(`Base lista: ${await Categories.count()} categorias, ${await Products.count()} productos.`);
 }

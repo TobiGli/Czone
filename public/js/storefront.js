@@ -39,6 +39,30 @@
     if (count) count.textContent = `${products.length} ${products.length === 1 ? "producto" : "productos"}`;
   }
 
+  function homeProductCard(product, mode = "feature") {
+    const id = String(product.id);
+    const hoodie = mode === "hoodie";
+    return `<article class="${hoodie ? "hoodie-card" : "home-product-card"}" data-product-id="${id}">
+      <div class="home-product-image"><img src="${imageUrl(product)}" alt="${product.name}"><div class="home-product-overlay"><p>${product.name}</p><span>${product.type || "urbano"} / ${product.category_id ? "C Zone" : "edición"}</span></div><button class="product-favorite" type="button" data-action="favorite" aria-label="Agregar a favoritos"><i class="${isFavorite(id) ? "fas" : "far"} fa-heart"></i></button><button class="icon-buy" type="button" data-action="cart" aria-label="Agregar al carrito"><i class="fas fa-plus"></i></button></div>
+      ${hoodie ? "" : `<div class="home-product-meta"><span>${product.type || "urbano"}</span><strong>${money(product.price)}</strong></div>`}
+    </article>`;
+  }
+
+  function renderHomeSections() {
+    const featured = document.querySelector("#featured-products");
+    if (featured) featured.innerHTML = state.products.slice(0, 4).map((product) => homeProductCard(product)).join("");
+    const hoodies = document.querySelector("#hoodie-grid");
+    if (hoodies) {
+      const hoodieProducts = state.products.filter((product) => product.type === "abrigo" || product.name.toLowerCase().includes("buzo"));
+      hoodies.innerHTML = (hoodieProducts.length ? hoodieProducts : state.products.slice(0, 3)).slice(0, 3).map((product) => homeProductCard(product, "hoodie")).join("");
+    }
+    const popular = document.querySelector("#popular-products");
+    if (popular) {
+      const popularProducts = [...state.products].sort((a, b) => Number(b.sales_count || 0) - Number(a.sales_count || 0)).slice(0, 3);
+      popular.innerHTML = popularProducts.map((product, index) => `<article class="popular-item"><span class="popular-rank">0${index + 1}</span><img src="${imageUrl(product)}" alt="${product.name}"><div><p>${product.type || "urbano"}</p><h3>${product.name}</h3><strong>${money(product.price)}</strong></div><button class="icon-buy" type="button" data-product-id="${product.id}" data-action="cart" aria-label="Agregar al carrito"><i class="fas fa-plus"></i></button></article>`).join("");
+    }
+  }
+
   function updateCounters() {
     document.querySelectorAll(".cart-count").forEach((node) => { node.textContent = cartQuantity(); });
   }
@@ -110,7 +134,7 @@
     const product = state.products.find((item) => String(item.id) === String(target.closest("[data-product-id], [data-id]")?.dataset.productId || target.dataset.id));
     if (target.dataset.action === "close-drawer") return closeDrawer();
     if (target.dataset.action === "close-search") return document.querySelector(".search-panel")?.classList.remove("is-open");
-    if (target.dataset.action === "favorite" && product) return toggleFavorite(product);
+    if (target.dataset.action === "favorite" && product) { toggleFavorite(product); renderHomeSections(); return; }
     if (target.dataset.action === "cart" && product) return addToCart(product);
     if (target.dataset.action === "remove-cart") { state.cart = state.cart.filter((item) => String(item.id) !== String(target.dataset.id)); save(); updateCounters(); renderDrawer(); }
     if (target.dataset.action === "checkout") window.alert("Tu carrito está listo. Próximamente conectaremos el pago.");
@@ -122,6 +146,7 @@
       event.currentTarget.querySelector("i").className = state.sortAscending ? "fas fa-arrow-down" : "fas fa-arrow-up";
       renderCatalog();
     });
-    try { const response = await fetch("/products"); state.products = await response.json(); renderCatalog(); updateCounters(); } catch { document.querySelectorAll(".catalog-grid").forEach((grid) => { grid.innerHTML = `<div class="empty-state"><i class="fas fa-cloud-slash"></i><h2>Catálogo no disponible</h2><p>Intentá nuevamente en unos segundos.</p></div>`; }); }
+    document.querySelector(".newsletter-form")?.addEventListener("submit", (event) => { event.preventDefault(); event.currentTarget.reset(); event.currentTarget.querySelector(".newsletter-status").textContent = "Listo. Revisá tu bandeja para confirmar la suscripción."; });
+    try { const response = await fetch("/products"); state.products = await response.json(); renderCatalog(); renderHomeSections(); updateCounters(); } catch { document.querySelectorAll(".catalog-grid, .home-product-grid, .hoodie-grid, .popular-grid").forEach((grid) => { grid.innerHTML = `<div class="empty-state"><i class="fas fa-cloud-slash"></i><h2>Catálogo no disponible</h2><p>Intentá nuevamente en unos segundos.</p></div>`; }); }
   });
 })();

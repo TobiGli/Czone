@@ -10,6 +10,7 @@ const asyncHandler = (handler: RequestHandler): RequestHandler =>
 router.get("/", mainController.home);
 router.get("/coleccion", mainController.collection);
 router.get("/ofertas", mainController.offers);
+router.get("/contacto", mainController.contact);
 router.post("/products", asyncHandler(mainController.productCreate));
 router.get("/products", asyncHandler(mainController.productsList));
 router.get("/products/:id", asyncHandler(mainController.productDetail));

@@ -10,6 +10,7 @@ export interface ProductAttributes {
     talles?: string;
     description?: string;
     stock?: number;
+    sales_count?: number;
     imagen1?: string;
     imagen2?: string;
     imagen3?: string;
@@ -26,6 +27,7 @@ export class Products extends Model<ProductAttributes, ProductCreationAttributes
     declare talles: string;
     declare description: string;
     declare stock: number;
+    declare sales_count: number;
     declare imagen1: string;
     declare imagen2: string;
     declare imagen3: string;
@@ -43,6 +45,7 @@ export function initProducts(sequelize: Sequelize): typeof Products {
         talles: DataTypes.STRING(255),
         description: DataTypes.STRING(255),
         stock: DataTypes.INTEGER.UNSIGNED,
+        sales_count: DataTypes.INTEGER.UNSIGNED,
         imagen1: DataTypes.STRING(255),
         imagen2: DataTypes.STRING(255),
         imagen3: DataTypes.STRING(255)
