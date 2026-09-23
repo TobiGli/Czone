@@ -1291,9 +1291,10 @@ footer .brand {
 
 .site-footer {
   display: grid;
-  grid-template-columns: 1fr auto auto;
+  grid-template-columns: 1fr auto auto auto;
   align-items: end;
   gap: 40px;
+  min-height: 190px;
   padding: 50px max(20px, calc((100% - 1180px) / 2));
   color: rgba(255, 255, 255, 0.7);
   background: var(--ink);
@@ -1311,6 +1312,8 @@ footer .brand {
 
 .footer-links {
   display: flex;
+  align-items: center;
+  flex-wrap: wrap;
   gap: 25px;
 }
 
@@ -1318,6 +1321,38 @@ footer .brand {
   color: #fff;
   font-size: 0.8rem;
   text-decoration: none;
+}
+
+.footer-links a:hover,
+.footer-contact a:hover {
+  color: #f6c6a8;
+}
+
+.footer-contact {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.footer-contact a {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.8rem;
+  text-decoration: none;
+}
+
+.footer-contact span {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.8rem;
+  white-space: nowrap;
+}
+
+.footer-contact span i {
+  margin-right: 5px;
+  color: #f6c6a8;
+}
+
+.footer-contact a[aria-label] {
+  font-size: 1rem;
 }
 
 .contact-main {
@@ -1472,6 +1507,14 @@ footer .brand {
   .site-footer {
     grid-template-columns: 1fr;
     gap: 25px;
+    min-height: 0;
+    padding-top: 42px;
+    padding-bottom: 42px;
+  }
+
+  .footer-links,
+  .footer-contact {
+    flex-wrap: wrap;
   }
 
   .contact-main {
