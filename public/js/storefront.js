@@ -4,17 +4,45 @@
     favorites: JSON.parse(localStorage.getItem("czone-favorites") || "[]"),
     cart: JSON.parse(localStorage.getItem("czone-cart") || "[]"),
     drawer: "cart",
-    sortAscending: true
+    sortAscending: true,
+    coupon: JSON.parse(localStorage.getItem("czone-coupon") || "null")
   };
 
   const money = (value) => `$${Number(value).toLocaleString("es-AR")}`;
   const imageUrl = (product) => `/img/${product.imagen1 || "buzo1.png"}`;
+  const sizesFor = (product) => (product.talles || "Unico").split(",").map((size) => size.trim()).filter(Boolean);
+  const cartKey = (productId, size) => `${productId}:${size}`;
+  const coupons = {
+    ZONE10: { label: "10% de descuento", percent: 0.10 },
+    URBANO15: { label: "15% de descuento", percent: 0.15 },
+    PROMO2X1: { label: "Promoción 2x1", promotion: "2x1" },
+    PROMO3X2: { label: "Promoción 3x2", promotion: "3x2" }
+  };
   const save = () => {
     localStorage.setItem("czone-favorites", JSON.stringify(state.favorites));
     localStorage.setItem("czone-cart", JSON.stringify(state.cart));
   };
   const isFavorite = (id) => state.favorites.includes(String(id));
   const cartQuantity = () => state.cart.reduce((total, item) => total + item.quantity, 0);
+
+  function calculateCart() {
+    const units = state.cart.flatMap((item) => Array.from({ length: item.quantity }, () => Number(item.price)));
+    const subtotal = units.reduce((total, price) => total + price, 0);
+    let promotionDiscount = 0;
+    const promotion = state.coupon?.promotion;
+    if (promotion) {
+      const groupSize = promotion === "2x1" ? 2 : 3;
+      const paidUnits = promotion === "2x1" ? 1 : 2;
+      const sortedUnits = [...units].sort((a, b) => b - a);
+      for (let index = 0; index < sortedUnits.length; index += groupSize) {
+        const group = sortedUnits.slice(index, index + groupSize);
+        promotionDiscount += group.slice(paidUnits).reduce((total, price) => total + price, 0);
+      }
+    }
+    const afterPromotion = subtotal - promotionDiscount;
+    const couponDiscount = state.coupon?.percent ? afterPromotion * state.coupon.percent : 0;
+    return { subtotal, promotionDiscount, couponDiscount, total: afterPromotion - couponDiscount };
+  }
 
   function productCard(product) {
     const id = String(product.id);
@@ -23,7 +51,7 @@
         <img class="product-image" src="${imageUrl(product)}" alt="${product.name}">
         <button class="product-favorite ${isFavorite(id) ? "is-favorite" : ""}" type="button" data-action="favorite" aria-label="${isFavorite(id) ? "Quitar de favoritos" : "Agregar a favoritos"}"><i class="${isFavorite(id) ? "fas" : "far"} fa-heart"></i></button>
       </div>
-      <div class="product-card-info"><p class="product-type">${product.type || "urbano"}</p><h2>${product.name}</h2><p class="product-description">${product.description || "Prenda urbana C Zone."}</p><div class="product-buy-row"><strong>${money(product.price)}</strong><button class="add-to-cart" type="button" data-action="cart"><i class="fas fa-plus"></i> Agregar</button></div></div>
+      <div class="product-card-info"><p class="product-type">${product.type || "urbano"}</p><h2>${product.name}</h2><p class="product-description">${product.description || "Prenda urbana C Zone."}</p><div class="product-buy-row"><strong>${money(product.price)}</strong><select class="size-select" aria-label="Talle de ${product.name}">${sizesFor(product).map((size) => `<option value="${size}">${size}</option>`).join("")}</select><button class="add-to-cart" type="button" data-action="cart"><i class="fas fa-plus"></i><span class="visually-hidden">Agregar</span></button></div></div>
     </article>`;
   }
 
@@ -79,8 +107,8 @@
       content.innerHTML = `<p class="eyebrow">Tu selección</p><h2>Favoritos</h2>${favorites.length ? `<div class="drawer-list">${favorites.map((product) => `<div class="drawer-item"><img src="${imageUrl(product)}" alt=""><div><strong>${product.name}</strong><span>${money(product.price)}</span></div><button type="button" data-action="cart" data-id="${product.id}" aria-label="Agregar al carrito"><i class="fas fa-plus"></i></button></div>`).join("")}</div>` : `<div class="drawer-empty"><i class="far fa-heart"></i><p>Guardá prendas con el corazón para verlas acá.</p></div>`}`;
       return;
     }
-    const total = state.cart.reduce((sum, item) => sum + Number(item.price) * item.quantity, 0);
-    content.innerHTML = `<p class="eyebrow">Tu selección</p><h2>Carrito</h2>${state.cart.length ? `<div class="drawer-list">${state.cart.map((item) => `<div class="drawer-item"><img src="${imageUrl(item)}" alt=""><div><strong>${item.name}</strong><span>${money(item.price)} x ${item.quantity}</span></div><button type="button" data-action="remove-cart" data-id="${item.id}" aria-label="Quitar del carrito"><i class="fas fa-minus"></i></button></div>`).join("")}</div><div class="drawer-total"><span>Total</span><strong>${money(total)}</strong></div><button class="checkout-button" type="button" data-action="checkout">Continuar compra</button>` : `<div class="drawer-empty"><i class="fas fa-shopping-bag"></i><p>Tu carrito todavía está vacío.</p><a href="/coleccion">Explorar colección</a></div>`}`;
+    const totals = calculateCart();
+    content.innerHTML = `<p class="eyebrow">Tu selección</p><h2>Carrito</h2>${state.cart.length ? `<div class="drawer-list">${state.cart.map((item) => `<div class="drawer-item"><img src="${imageUrl(item)}" alt=""><div><strong>${item.name}</strong><span>Talle ${item.size} · ${money(item.price)}</span><div class="quantity-control"><button type="button" data-action="dec-cart" data-key="${item.key}" aria-label="Reducir cantidad"><i class="fas fa-minus"></i></button><b>${item.quantity}</b><button type="button" data-action="inc-cart" data-key="${item.key}" aria-label="Aumentar cantidad"><i class="fas fa-plus"></i></button></div></div><button type="button" data-action="remove-cart" data-key="${item.key}" aria-label="Quitar del carrito"><i class="fas fa-trash"></i></button></div>`).join("")}</div><form class="coupon-form"><input name="coupon" placeholder="Código de cupón" value="${state.coupon?.code || ""}" aria-label="Código de cupón"><button type="submit">Aplicar</button></form>${state.coupon ? `<p class="coupon-applied"><i class="fas fa-check"></i> ${state.coupon.label}</p>` : ""}<div class="drawer-totals"><div><span>Subtotal</span><strong>${money(totals.subtotal)}</strong></div>${totals.promotionDiscount ? `<div><span>Promo</span><strong>-${money(totals.promotionDiscount)}</strong></div>` : ""}${totals.couponDiscount ? `<div><span>Descuento</span><strong>-${money(totals.couponDiscount)}</strong></div>` : ""}<div class="drawer-total"><span>Total</span><strong>${money(totals.total)}</strong></div></div><a class="checkout-button" href="/checkout">Continuar compra <i class="fas fa-arrow-right"></i></a>` : `<div class="drawer-empty"><i class="fas fa-shopping-bag"></i><p>Tu carrito todavía está vacío.</p><a href="/coleccion">Explorar colección</a></div>`}`;
   }
 
   function openDrawer(type) {
@@ -99,9 +127,11 @@
     document.body.classList.remove("drawer-open");
   }
 
-  function addToCart(product) {
-    const item = state.cart.find((cartItem) => String(cartItem.id) === String(product.id));
-    if (item) item.quantity += 1; else state.cart.push({ ...product, quantity: 1 });
+  function addToCart(product, selectedSize) {
+    const size = selectedSize || sizesFor(product)[0];
+    const key = cartKey(product.id, size);
+    const item = state.cart.find((cartItem) => cartItem.key === key);
+    if (item) item.quantity += 1; else state.cart.push({ ...product, size, key, quantity: 1 });
     save(); updateCounters(); openDrawer("cart");
   }
 
@@ -135,9 +165,17 @@
     if (target.dataset.action === "close-drawer") return closeDrawer();
     if (target.dataset.action === "close-search") return document.querySelector(".search-panel")?.classList.remove("is-open");
     if (target.dataset.action === "favorite" && product) { toggleFavorite(product); renderHomeSections(); return; }
-    if (target.dataset.action === "cart" && product) return addToCart(product);
-    if (target.dataset.action === "remove-cart") { state.cart = state.cart.filter((item) => String(item.id) !== String(target.dataset.id)); save(); updateCounters(); renderDrawer(); }
-    if (target.dataset.action === "checkout") window.alert("Tu carrito está listo. Próximamente conectaremos el pago.");
+    if (target.dataset.action === "cart" && product) return addToCart(product, target.closest(".product-buy-row")?.querySelector(".size-select")?.value);
+    if (target.dataset.action === "remove-cart") { state.cart = state.cart.filter((item) => item.key !== target.dataset.key); save(); updateCounters(); renderDrawer(); }
+    if (target.dataset.action === "inc-cart" || target.dataset.action === "dec-cart") { const item = state.cart.find((cartItem) => cartItem.key === target.dataset.key); if (item) item.quantity = Math.max(0, item.quantity + (target.dataset.action === "inc-cart" ? 1 : -1)); state.cart = state.cart.filter((item) => item.quantity > 0); save(); updateCounters(); renderDrawer(); }
+  });
+
+  document.addEventListener("submit", (event) => {
+    if (!event.target.matches(".coupon-form")) return;
+    event.preventDefault();
+    const code = new FormData(event.target).get("coupon").toString().trim().toUpperCase();
+    if (coupons[code]) { state.coupon = { code, ...coupons[code] }; localStorage.setItem("czone-coupon", JSON.stringify(state.coupon)); renderDrawer(); }
+    else { state.coupon = null; localStorage.removeItem("czone-coupon"); renderDrawer(); window.alert("Cupón no válido. Probá ZONE10, URBANO15, PROMO2X1 o PROMO3X2."); }
   });
 
   document.addEventListener("DOMContentLoaded", async () => {
@@ -147,6 +185,15 @@
       renderCatalog();
     });
     document.querySelector(".newsletter-form")?.addEventListener("submit", (event) => { event.preventDefault(); event.currentTarget.reset(); event.currentTarget.querySelector(".newsletter-status").textContent = "Listo. Revisá tu bandeja para confirmar la suscripción."; });
-    try { const response = await fetch("/products"); state.products = await response.json(); renderCatalog(); renderHomeSections(); updateCounters(); } catch { document.querySelectorAll(".catalog-grid, .home-product-grid, .hoodie-grid, .popular-grid").forEach((grid) => { grid.innerHTML = `<div class="empty-state"><i class="fas fa-cloud-slash"></i><h2>Catálogo no disponible</h2><p>Intentá nuevamente en unos segundos.</p></div>`; }); }
+    if (document.querySelector(".checkout-page")) renderCheckout();
+    try { const response = await fetch("/products"); state.products = await response.json(); renderCatalog(); renderHomeSections(); updateCounters(); if (document.querySelector(".checkout-page")) renderCheckout(); } catch { document.querySelectorAll(".catalog-grid, .home-product-grid, .hoodie-grid, .popular-grid").forEach((grid) => { grid.innerHTML = `<div class="empty-state"><i class="fas fa-cloud-slash"></i><h2>Catálogo no disponible</h2><p>Intentá nuevamente en unos segundos.</p></div>`; }); }
   });
+
+  function renderCheckout() {
+    const summary = document.querySelector("#checkout-summary");
+    if (!summary) return;
+    const totals = calculateCart();
+    summary.innerHTML = state.cart.length ? `${state.cart.map((item) => `<div class="checkout-line"><img src="${imageUrl(item)}" alt=""><div><strong>${item.name}</strong><span>Talle ${item.size} · ${item.quantity} unidad(es)</span></div><b>${money(Number(item.price) * item.quantity)}</b></div>`).join("")}<div class="checkout-total"><span>Subtotal</span><strong>${money(totals.subtotal)}</strong></div>${totals.promotionDiscount ? `<div class="checkout-total discount"><span>Promoción</span><strong>-${money(totals.promotionDiscount)}</strong></div>` : ""}${totals.couponDiscount ? `<div class="checkout-total discount"><span>Cupón ${state.coupon.code}</span><strong>-${money(totals.couponDiscount)}</strong></div>` : ""}<div class="checkout-total final"><span>Total</span><strong>${money(totals.total)}</strong></div>` : `<div class="drawer-empty"><p>Tu carrito está vacío.</p><a href="/coleccion">Volver a la colección</a></div>`;
+    document.querySelector("#checkout-form")?.addEventListener("submit", (event) => { event.preventDefault(); const status = event.currentTarget.querySelector(".checkout-status"); status.textContent = "Pedido preparado. Conectá tu gateway en checkout.js para continuar al pago."; });
+  }
 })();

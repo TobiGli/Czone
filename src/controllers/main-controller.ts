@@ -17,6 +17,9 @@ const controller = {
     contact: (_req: Request, res: Response) => {
         res.sendFile(path.join(process.cwd(), "src", "views", "contact.html"));
     },
+    checkout: (_req: Request, res: Response) => {
+        res.sendFile(path.join(process.cwd(), "src", "views", "checkout.html"));
+    },
     productCreate: async (req: Request, res: Response) => {
         if (!req.body.name || req.body.price === undefined) {
             return res.status(400).json({ error: "name y price son obligatorios" });

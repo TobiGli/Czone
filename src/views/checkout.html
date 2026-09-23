@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>C Zone | Finalizar compra</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  <body class="checkout-page">
+    <nav class="site-nav" aria-label="Navegación principal">
+      <div class="nav-inner">
+        <a class="brand" href="/" aria-label="C Zone, inicio"><span class="brand-mark">C</span><span class="brand-name">ZONE</span></a>
+        <div class="checkout-secure"><i class="fas fa-lock"></i> Compra segura</div>
+      </div>
+    </nav>
+    <main class="checkout-main">
+      <div class="checkout-header"><a class="back-link" href="/coleccion"><i class="fas fa-arrow-left"></i> Volver a la colección</a><p class="eyebrow">C Zone / Checkout</p><h1>Tu compra,<br /><em>en camino.</em></h1></div>
+      <div class="checkout-layout">
+        <section class="checkout-summary-section"><h2>Resumen del pedido</h2><div id="checkout-summary" class="checkout-summary"></div></section>
+        <form class="checkout-form" id="checkout-form">
+          <h2>Datos de entrega</h2>
+          <label>Nombre completo<input name="name" type="text" autocomplete="name" required></label>
+          <label>Email<input name="email" type="email" autocomplete="email" required></label>
+          <label>Dirección<input name="address" type="text" autocomplete="street-address" required></label>
+          <div class="checkout-form-row"><label>Ciudad<input name="city" type="text" autocomplete="address-level2" required></label><label>Código postal<input name="zip" type="text" autocomplete="postal-code" required></label></div>
+          <div class="payment-placeholder"><i class="fas fa-credit-card"></i><div><strong>Pasarela de pago</strong><span>Lista para conectar Mercado Pago, Stripe o el gateway que elijas.</span></div></div>
+          <button class="solid-link checkout-submit" type="submit">Continuar al pago <i class="fas fa-arrow-right"></i></button>
+          <p class="checkout-status" role="status"></p>
+        </form>
+      </div>
+    </main>
+    <script src="/js/storefront.js" defer></script>
+  </body>
+</html>
