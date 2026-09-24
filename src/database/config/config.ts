@@ -4,6 +4,11 @@ import { Options } from "sequelize";
 
 const caPath = process.env.DB_CA_PATH || path.join(process.env.APPDATA || "", "postgresql", "root.crt");
 const sslCa = process.env.DB_SSL_CA || (fs.existsSync(caPath) ? fs.readFileSync(caPath, "utf8") : undefined);
+const ssl = {
+    require: true,
+    rejectUnauthorized: Boolean(sslCa),
+    ...(sslCa ? { ca: sslCa } : {})
+};
 
 const removeConnectionSslOptions = (value: string): string => {
     try {
@@ -22,7 +27,5 @@ export const databaseUrl = process.env.DATABASE_URL
 export const databaseOptions: Options = {
     dialect: "postgres",
     logging: false,
-    dialectOptions: sslCa
-        ? { ssl: { require: true, rejectUnauthorized: true, ca: sslCa } }
-        : undefined
+    dialectOptions: { ssl }
 };
