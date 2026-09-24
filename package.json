@@ -7,7 +7,7 @@
     "build": "tsc",
     "db:setup": "tsx src/database/setup.ts",
     "dev": "tsx watch src/app.ts",
-    "start": "node dist/app.js",
+    "start": "node dist/database/setup.js && node dist/app.js",
     "typecheck": "tsc --noEmit",
     "test": "npm run typecheck",
     "sq": "sequelize init"

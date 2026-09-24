@@ -9,7 +9,7 @@ la pagina web para verla es ---- https://czone.onrender.com/
 Configura el servicio como `Web Service` con estos comandos:
 
 - **Build Command:** `npm ci --include=dev && npm run build`
-- **Start Command:** `npm start`
+- **Start Command:** `npm start` (prepara las tablas y los productos automáticamente antes de iniciar el servidor)
 
 Define estas variables de entorno en Render para conectar CockroachDB:
 

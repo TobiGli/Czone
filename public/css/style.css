@@ -1011,7 +1011,7 @@ body {
 
 /* ofertas */
 #offers {
-  background: url(IMG/catalogo1.jpg) top/cover no-repeat !important;
+  background: url(/img/catalogo1.jpg) top/cover no-repeat !important;
 }
 
 #offers .row {
